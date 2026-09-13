@@ -1,172 +1,474 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <title>Home Page</title>
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  <style type="text/css">
-    html {
-      background-color: #666;
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231c3d53'/%3E%3Cpath d='M8 15.2 16 8l8 7.2V24a1.2 1.2 0 0 1-1.2 1.2H9.2A1.2 1.2 0 0 1 8 24z' fill='%23e8eef3'/%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --bg: #1a2229;
+      --bg-glow: #243140;
+      --card: #232c35;
+      --card-hover: #2a3540;
+      --line: #35414d;
+      --text: #e8eef3;
+      --muted: #93a1ae;
+      --accent: #7eb6d4;
     }
 
-    a {
-      font-size: 1.7em;
-      font-weight: bold;
-      color: #1c3d53;
+    * {
+      box-sizing: border-box;
     }
 
-    .section ul {
-      float: left;
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
     }
 
-    a:hover {
-      color: #555;
+    body {
+      color: var(--text);
+      font: 16px/1.45 "Segoe UI", "SF Pro Text", system-ui, sans-serif;
+      background:
+        radial-gradient(900px 480px at 50% -10%, var(--bg-glow), transparent 60%),
+        var(--bg);
     }
 
-    .personal {
-      width: 100%;
-      height: 300px;
+    .page {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 2.25rem 0 3rem;
+    }
+
+    header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.65rem;
+      font-weight: 650;
+      letter-spacing: -0.03em;
+    }
+
+    #clock {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
     }
 
     .section {
-      float: left;
-      min-width: 220px;
-      border: 1px solid #1c3d53;
-      margin: 10px;
-      padding: 10px;
-      height: 300px;
-      ;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1rem 0.85rem 0.75rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .section h2 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0 0.4rem 0.65rem;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .section h2 svg {
+      width: 15px;
+      height: 15px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .section ul {
-      float: left;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .section a {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.55rem 0.55rem;
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 0.98rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .section a:hover {
+      background: var(--card-hover);
+      color: #fff;
+    }
+
+    .icon {
+      position: relative;
+      flex: 0 0 30px;
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: #e8eef3;
+      color: #5b6b78;
+      font-size: 0.72rem;
+      font-weight: 700;
+      overflow: hidden;
+    }
+
+    .icon::before {
+      content: attr(data-letter);
+    }
+
+    .icon img {
+      position: absolute;
+      inset: 5px;
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
+
+    .icon img[hidden] {
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
-
-  <script type="text/javascript">
-    function init() {
-      //let userAgent = navigator.userAgent;
-    }
-
-  </script>
 </head>
 
-<body onload="init()">
-  <div id="ffchrome">
-    <div class="personal">
-      <div class="section">
-        <span>Social</span>
-        <br />
+<body>
+  <div class="page">
+    <header>
+      <h1>Home</h1>
+      <p id="clock"></p>
+    </header>
+
+    <main class="grid">
+      <section class="section">
+        <h2>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M16 19v-1.2A3.8 3.8 0 0 0 12.2 14H7.8A3.8 3.8 0 0 0 4 17.8V19" />
+            <circle cx="10" cy="8" r="3" />
+            <path d="M20 19v-1.1A3.2 3.2 0 0 0 17.4 15" />
+            <path d="M16.5 5.2a2.8 2.8 0 0 1 0 5.5" />
+          </svg>
+          Social
+        </h2>
         <ul>
           <li>
-            <a href="https://www.reddit.com" target="_blank">reddit</a>
+            <a href="https://www.reddit.com" target="_blank" rel="noopener noreferrer" data-domain="reddit.com" data-icon="reddit">
+              <span class="icon" data-letter="R"></span>reddit
+            </a>
           </li>
           <li>
-            <a href="https://bsky.app/" target="_blank">BlueSky</a>
+            <a href="https://bsky.app/" target="_blank" rel="noopener noreferrer" data-domain="bsky.app" data-icon="bluesky">
+              <span class="icon" data-letter="B"></span>BlueSky
+            </a>
           </li>
           <li>
-            <a href="https://mail.google.com" target="_blank">Gmail</a>
+            <a href="https://mail.google.com" target="_blank" rel="noopener noreferrer" data-domain="mail.google.com" data-icon="gmail">
+              <span class="icon" data-letter="G"></span>Gmail
+            </a>
           </li>
           <li>
-            <a href="https://mail.yahoo.com" target="_blank">Yahoo Mail</a>
+            <a href="https://mail.yahoo.com" target="_blank" rel="noopener noreferrer" data-domain="mail.yahoo.com" data-icon="yahoo">
+              <span class="icon" data-letter="Y"></span>Yahoo Mail
+            </a>
           </li>
           <li>
-            <a href="https://messages.google.com/web" target="_blank">Messages</a>
+            <a href="https://messages.google.com/web" target="_blank" rel="noopener noreferrer" data-domain="messages.google.com" data-icon="google-messages">
+              <span class="icon" data-letter="M"></span>Messages
+            </a>
           </li>
         </ul>
-      </div>
-      <div class="section">
-        <span>Football</span>
-        <br />
+      </section>
+
+      <section class="section">
+        <h2>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6.4 16.8c2.4 2.6 7.2 3.8 11.1 1.1 3.8-2.6 4.6-7.3 2.2-9.9-2.4-2.6-7.2-3.8-11.1-1.1-3.8 2.6-4.6 7.3-2.2 9.9z" />
+            <path d="M9.8 10.4 14 14.8" />
+            <path d="m10.6 12.6 1.3 1.3M12 11.2l1.3 1.3M9.3 14l1.3 1.3" />
+          </svg>
+          Football
+        </h2>
         <ul>
           <li>
-            <a href="https://football.fantasysports.yahoo.com/" target="_blank">Yahoo! Fantasy League 1</a>
+            <a href="https://football.fantasysports.yahoo.com/" target="_blank" rel="noopener noreferrer" data-domain="football.fantasysports.yahoo.com" data-icon="yahoo">
+              <span class="icon" data-letter="Y"></span>Yahoo! Fantasy League 1
+            </a>
           </li>
           <li>
-            <a href="https://football.fantasysports.yahoo.com/f1/929045" target="_blank">UPTAHOLICS</a>
+            <a href="https://www.reddit.com/r/Seahawks+fantasyfootball+nfl/" target="_blank" rel="noopener noreferrer" data-domain="reddit.com" data-icon="reddit">
+              <span class="icon" data-letter="R"></span>reddit - football multi
+            </a>
           </li>
           <li>
-            <a href="https://www.reddit.com/r/Seahawks+fantasyfootball+nfl/" target="_blank">reddit - football multi</a>
+            <a href="https://www.fantasypros.com/nfl/myplaybook/cheat-sheets.php" target="_blank" rel="noopener noreferrer" data-domain="fantasypros.com">
+              <span class="icon" data-letter="F"></span>Fantasy Pros
+            </a>
           </li>
           <li>
-            <a href="https://www.fantasypros.com/nfl/myplaybook/cheat-sheets.php" target="_blank">Fantasy Pros</a>
+            <a href="http://www.borischen.co/" target="_blank" rel="noopener noreferrer" data-domain="borischen.co">
+              <span class="icon" data-letter="B"></span>Boris Chen Tier Charts
+            </a>
           </li>
           <li>
-            <a href="http://www.borischen.co/" target="_blank">Boris Chen Tier Charts</a>
-          </li>
-          <li>
-            <a href="https://www.nflbite.is/" target="_blank">NFL Bite</a>
+            <a href="https://www.nflbite.is/" target="_blank" rel="noopener noreferrer" data-domain="nflbite.is">
+              <span class="icon" data-letter="N"></span>NFL Bite
+            </a>
           </li>
         </ul>
-      </div>
-      <div class="section">
-        <span>Shopping</span>
-        <br />
+      </section>
+
+      <section class="section">
+        <h2>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 9h15l-1.4 8.2A2 2 0 0 1 17.6 19H8.7a2 2 0 0 1-2-1.7L5.2 6H3" />
+            <circle cx="9" cy="21" r="1" />
+            <circle cx="17" cy="21" r="1" />
+          </svg>
+          Shopping
+        </h2>
         <ul>
           <li>
-            <a href="https://slickdeals.net/" target="_blank">Slick Deals</a>
+            <a href="https://slickdeals.net/" target="_blank" rel="noopener noreferrer" data-domain="slickdeals.net">
+              <span class="icon" data-letter="S"></span>Slick Deals
+            </a>
           </li>
           <li>
-            <a href="https://www.amazon.com/" target="_blank">Amazon</a>
+            <a href="https://www.amazon.com/" target="_blank" rel="noopener noreferrer" data-domain="amazon.com" data-icon="amazon">
+              <span class="icon" data-letter="A"></span>Amazon
+            </a>
           </li>
           <li>
-            <a href="https://ira.empower-retirement.com/participant/#/sfd-login?accu=MYERIRA"
-              target="_blank">Empower</a>
+            <a href="https://ira.empower-retirement.com/participant/#/sfd-login?accu=MYERIRA" target="_blank" rel="noopener noreferrer" data-domain="ira.empower-retirement.com">
+              <span class="icon" data-letter="E"></span>Empower
+            </a>
           </li>
         </ul>
-      </div>
-      <div class="section">
-        <span>Media</span>
-        <br />
+      </section>
+
+      <section class="section">
+        <h2>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3.5" y="5.5" width="17" height="13" rx="2" />
+            <path d="m10 9.5 5 3-5 3z" />
+          </svg>
+          Media
+        </h2>
         <ul>
           <li>
-            <a href="https://www.youtube.com/" target="_blank">YouTube</a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" data-domain="youtube.com" data-icon="youtube">
+              <span class="icon" data-letter="Y"></span>YouTube
+            </a>
           </li>
           <li>
-            <a href="https://www.amazon.com/gp/video/storefront" target="_blank">Prime Video</a>
+            <a href="https://www.amazon.com/gp/video/storefront" target="_blank" rel="noopener noreferrer" data-domain="amazon.com" data-icon="prime-video-alt">
+              <span class="icon" data-letter="P"></span>Prime Video
+            </a>
           </li>
           <li>
-            <a href="https://www.netflix.com/" target="_blank">Netflix</a>
+            <a href="https://www.netflix.com/" target="_blank" rel="noopener noreferrer" data-domain="netflix.com" data-icon="netflix">
+              <span class="icon" data-letter="N"></span>Netflix
+            </a>
           </li>
           <li>
-            <a href="https://www.hulu.com/" target="_blank">Hulu</a>
+            <a href="https://www.hulu.com/" target="_blank" rel="noopener noreferrer" data-domain="hulu.com" data-icon="hulu">
+              <span class="icon" data-letter="H"></span>Hulu
+            </a>
           </li>
           <li>
-            <a href="https://www.twitch.tv/" target="_blank">Twitch</a>
+            <a href="https://www.twitch.tv/" target="_blank" rel="noopener noreferrer" data-domain="twitch.tv" data-icon="twitch">
+              <span class="icon" data-letter="T"></span>Twitch
+            </a>
           </li>
         </ul>
-      </div>
-      <div class="section">
-        <span>Cabbage</span>
-        <br />
+      </section>
+
+      <section class="section">
+        <h2>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 20c4.5-1.2 7-4.4 7-8.4 0-3.2-1.8-5.4-3.4-6.6 0 2.1-1.1 3.6-2.8 4.2C12.2 6 10 4 8.6 4 9.8 6.2 9 8.4 8 9.7 6.4 11.7 5.5 13.6 5.5 15.4 5.5 18 8.2 20 12 20z" />
+          </svg>
+          Cabbage
+        </h2>
         <ul>
           <li>
-            <a href="https://portal.azure.com/#home" target="_blank">Azure Portal</a>
+            <a href="https://portal.azure.com/#home" target="_blank" rel="noopener noreferrer" data-domain="portal.azure.com" data-icon="azure">
+              <span class="icon" data-letter="A"></span>Azure Portal
+            </a>
           </li>
           <li>
-            <a href="https://github.com/mattlokk/Cabbage" target="_blank">Repository</a>
+            <a href="https://github.com/mattlokk/Cabbage" target="_blank" rel="noopener noreferrer" data-domain="github.com" data-icon="github">
+              <span class="icon" data-letter="G"></span>Repository
+            </a>
           </li>
           <li>
-            <a href="http://localhost:5173/" target="_blank">Cabbage (localhost)</a>
+            <a href="http://localhost:5173/" target="_blank" rel="noopener noreferrer" data-icon="cabbage">
+              <span class="icon" data-letter="C"></span>Cabbage (localhost)
+            </a>
           </li>
           <li>
-            <a href="http://10.0.0.207:81" target="_blank">Cabbage (10.0.0.207)</a>
+            <a href="http://10.0.0.207:81" target="_blank" rel="noopener noreferrer" data-icon="cabbage">
+              <span class="icon" data-letter="C"></span>Cabbage (10.0.0.207)
+            </a>
           </li>
           <li>
-            <a href="https://red-glacier-0809d021e.2.azurestaticapps.net/" target="_blank">Cabbage (azure)</a>
+            <a href="https://red-glacier-0809d021e.2.azurestaticapps.net/" target="_blank" rel="noopener noreferrer" data-domain="red-glacier-0809d021e.2.azurestaticapps.net" data-icon="azure">
+              <span class="icon" data-letter="C"></span>Cabbage (azure)
+            </a>
           </li>
         </ul>
-      </div>
-      <div class="section"> <span>10.0.0.207</span> <br />
+      </section>
+
+      <section class="section">
+        <h2>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3.5" y="4.5" width="17" height="6" rx="1.4" />
+            <rect x="3.5" y="13.5" width="17" height="6" rx="1.4" />
+            <path d="M6.5 7.5h.01M6.5 16.5h.01" />
+          </svg>
+          10.0.0.207
+        </h2>
         <ul>
-          <li> <a href="https://10.0.0.207:9443" target="_blank">Portainer</a> </li>
-          <li> <a href="http://10.0.0.207:8989" target="_blank">Sonarr</a> </li>
-          <li> <a href="http://10.0.0.207:9696" target="_blank">Prowlarr</a> </li>
-          <li> <a href="http://10.0.0.207:8096" target="_blank">Jellyfin</a> </li>
-          <li> <a href="http://10.0.0.207:9091/transmission/web/" target="_blank">Transmission</a> </li>
-          <li> <a href="http://10.0.0.207:19999" target="_blank">Netdata</a> </li>
+          <li>
+            <a href="https://10.0.0.207:9443" target="_blank" rel="noopener noreferrer" data-icon="portainer">
+              <span class="icon" data-letter="P"></span>Portainer
+            </a>
+          </li>
+          <li>
+            <a href="http://10.0.0.207:8989" target="_blank" rel="noopener noreferrer" data-icon="sonarr">
+              <span class="icon" data-letter="S"></span>Sonarr
+            </a>
+          </li>
+          <li>
+            <a href="http://10.0.0.207:9696" target="_blank" rel="noopener noreferrer" data-icon="prowlarr">
+              <span class="icon" data-letter="P"></span>Prowlarr
+            </a>
+          </li>
+          <li>
+            <a href="http://10.0.0.207:8096" target="_blank" rel="noopener noreferrer" data-icon="jellyfin">
+              <span class="icon" data-letter="J"></span>Jellyfin
+            </a>
+          </li>
+          <li>
+            <a href="http://10.0.0.207:9091/transmission/web/" target="_blank" rel="noopener noreferrer" data-icon="transmission">
+              <span class="icon" data-letter="T"></span>Transmission
+            </a>
+          </li>
+          <li>
+            <a href="http://10.0.0.207:19999" target="_blank" rel="noopener noreferrer" data-icon="netdata">
+              <span class="icon" data-letter="N"></span>Netdata
+            </a>
+          </li>
         </ul>
-      </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const ICON_CDN = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/";
+    const CABBAGE_ICON = "data:image/svg+xml," + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="17" r="11" fill="#6fbf73"/><circle cx="16" cy="17" r="7.5" fill="#4e9a55"/><path d="M16 6c2.5 3.2 2.8 6.4 0 9-2.8-2.6-2.5-5.8 0-9z" fill="#8fd48a"/><path d="M16 12c1.4 1.8 1.5 3.6 0 5-1.5-1.4-1.4-3.2 0-5z" fill="#d7f3d4"/></svg>'
+    );
+
+    function setClock() {
+      const now = new Date();
+      const hour = now.getHours();
+      const greet = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+      const date = now.toLocaleDateString(undefined, {
+        weekday: "long",
+        month: "long",
+        day: "numeric"
+      });
+      document.getElementById("clock").textContent = greet + " · " + date;
+    }
+
+    function hideIcon(img) {
+      img.hidden = true;
+    }
+
+    function useGoogleIcon(img, domain) {
+      img.dataset.tried = "google";
+      img.src = "https://www.google.com/s2/favicons?sz=64&domain=" + encodeURIComponent(domain);
+    }
+
+    function onIconError(img) {
+      const link = img.closest("a");
+      const domain = link && link.dataset.domain;
+      if (domain && img.dataset.tried !== "google") {
+        useGoogleIcon(img, domain);
+        return;
+      }
+      hideIcon(img);
+    }
+
+    function addIcons() {
+      document.querySelectorAll(".section a").forEach(function (link) {
+        const holder = link.querySelector(".icon");
+        const img = document.createElement("img");
+        img.alt = "";
+        img.decoding = "async";
+        img.addEventListener("error", function () {
+          onIconError(img);
+        });
+
+        if (link.dataset.icon === "cabbage") {
+          img.src = CABBAGE_ICON;
+        } else if (link.dataset.icon) {
+          img.src = ICON_CDN + link.dataset.icon + ".svg";
+        } else if (link.dataset.domain) {
+          useGoogleIcon(img, link.dataset.domain);
+        } else {
+          return;
+        }
+
+        holder.appendChild(img);
+      });
+    }
+
+    setClock();
+    addIcons();
+  </script>
 </body>
 
 </html>
