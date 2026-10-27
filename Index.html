@@ -150,6 +150,12 @@
       object-fit: contain;
     }
 
+    .icon img.fill {
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
     .icon img[hidden] {
       display: none;
     }
@@ -329,12 +335,27 @@
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 20c4.5-1.2 7-4.4 7-8.4 0-3.2-1.8-5.4-3.4-6.6 0 2.1-1.1 3.6-2.8 4.2C12.2 6 10 4 8.6 4 9.8 6.2 9 8.4 8 9.7 6.4 11.7 5.5 13.6 5.5 15.4 5.5 18 8.2 20 12 20z" />
           </svg>
-          Cabbage
+          Projects
         </h2>
         <ul>
           <li>
             <a href="https://web-production-e2664.up.railway.app/" target="_blank" rel="noopener noreferrer" data-domain="web-production-e2664.up.railway.app" data-icon="cabbage">
               <span class="icon" data-letter="C"></span>Cabbage
+            </a>
+          </li>
+          <li>
+            <a href="https://mjadev360.github.io/TreeTrack/workspace" target="_blank" rel="noopener noreferrer" data-icon="treetrack">
+              <span class="icon" data-letter="T"></span>TreeTrack
+            </a>
+          </li>
+          <li>
+            <a href="https://railway.com/dashboard" target="_blank" rel="noopener noreferrer" data-domain="railway.com" data-icon="railway">
+              <span class="icon" data-letter="R"></span>Railway
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" data-domain="github.com" data-icon="github">
+              <span class="icon" data-letter="G"></span>GitHub
             </a>
           </li>
         </ul>
@@ -347,36 +368,36 @@
             <rect x="3.5" y="13.5" width="17" height="6" rx="1.4" />
             <path d="M6.5 7.5h.01M6.5 16.5h.01" />
           </svg>
-          10.0.0.207
+          Anderserv
         </h2>
         <ul>
           <li>
-            <a href="https://10.0.0.207:9443" target="_blank" rel="noopener noreferrer" data-icon="portainer">
+            <a href="https://10.0.0.79:9443" target="_blank" rel="noopener noreferrer" data-icon="portainer">
               <span class="icon" data-letter="P"></span>Portainer
             </a>
           </li>
           <li>
-            <a href="http://10.0.0.207:8989" target="_blank" rel="noopener noreferrer" data-icon="sonarr">
+            <a href="http://10.0.0.79:8989" target="_blank" rel="noopener noreferrer" data-icon="sonarr">
               <span class="icon" data-letter="S"></span>Sonarr
             </a>
           </li>
           <li>
-            <a href="http://10.0.0.207:9696" target="_blank" rel="noopener noreferrer" data-icon="prowlarr">
+            <a href="http://10.0.0.79:9696" target="_blank" rel="noopener noreferrer" data-icon="prowlarr">
               <span class="icon" data-letter="P"></span>Prowlarr
             </a>
           </li>
           <li>
-            <a href="http://10.0.0.207:8096" target="_blank" rel="noopener noreferrer" data-icon="jellyfin">
+            <a href="http://10.0.0.79:8096" target="_blank" rel="noopener noreferrer" data-icon="jellyfin">
               <span class="icon" data-letter="J"></span>Jellyfin
             </a>
           </li>
           <li>
-            <a href="http://10.0.0.207:8080/" target="_blank" rel="noopener noreferrer" data-icon="qbittorrent">
+            <a href="http://10.0.0.79:8080/" target="_blank" rel="noopener noreferrer" data-icon="qbittorrent">
               <span class="icon" data-letter="Q"></span>qBittorrent
             </a>
           </li>
           <li>
-            <a href="http://10.0.0.207:19999" target="_blank" rel="noopener noreferrer" data-icon="netdata">
+            <a href="http://10.0.0.79:19999" target="_blank" rel="noopener noreferrer" data-icon="netdata">
               <span class="icon" data-letter="N"></span>Netdata
             </a>
           </li>
@@ -390,6 +411,7 @@
     const CABBAGE_ICON = "data:image/svg+xml," + encodeURIComponent(
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="17" r="11" fill="#6fbf73"/><circle cx="16" cy="17" r="7.5" fill="#4e9a55"/><path d="M16 6c2.5 3.2 2.8 6.4 0 9-2.8-2.6-2.5-5.8 0-9z" fill="#8fd48a"/><path d="M16 12c1.4 1.8 1.5 3.6 0 5-1.5-1.4-1.4-3.2 0-5z" fill="#d7f3d4"/></svg>'
     );
+    const TREETRACK_ICON = "data:image/png;base64,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";
 
     function setClock() {
       const now = new Date();
@@ -434,6 +456,9 @@
 
         if (link.dataset.icon === "cabbage") {
           img.src = CABBAGE_ICON;
+        } else if (link.dataset.icon === "treetrack") {
+          img.src = TREETRACK_ICON;
+          img.classList.add("fill");
         } else if (link.dataset.icon) {
           img.src = ICON_CDN + link.dataset.icon + ".svg";
         } else if (link.dataset.domain) {
